@@ -19,7 +19,6 @@ const app = express();
 const logData = [];
 
 app.use((req, res, next) => {
-// write your logging code here
     let log = [{
         agent: req.headers['user-agent'],
         time: new Date().toISOString(),
@@ -28,7 +27,7 @@ app.use((req, res, next) => {
         version: `HTTP/${req.httpVersion}`,
         status: res.statusCode
     }];
-    
+    console.log(req);
     csvWriter
         .writeRecords(log)
         .then( () => logData.push(log))
@@ -37,12 +36,10 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-// write your code to respond "ok" here
     res.status(200).send('ok');
 });
 
 app.get('/logs', (req, res) => {
-// write your code to return a json object containing the log data here
     res.status(200)
     csv()
         .fromFile(csvFilePath)
