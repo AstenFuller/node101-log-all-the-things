@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    res.status(200).send('ok');
+    res.status(200).send('go to /logs for request info');
 });
 
 app.get('/logs', (req, res) => {
